@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCADMcpPlugin", "AutoCADMcpPlugin\AutoCADMcpPlugin.csproj", "{3DD050DF-0947-41AC-853E-98B6ED1CAC72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCadMcp", "AutoCadMcp\AutoCadMcp.csproj", "{D9950B85-1B4E-42E4-BC02-3E0A3099EEED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCadMcp.Model", "AutoCadMcp.Model\AutoCadMcp.Model.csproj", "{F60FF25D-C8CD-4107-99D4-45B194E85D9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCadMcp.Tcp", "AutoCadMcp.Tcp\AutoCadMcp.Tcp.csproj", "{D0780CCD-E5B7-4D46-80F2-ADBF6EBC71DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DD050DF-0947-41AC-853E-98B6ED1CAC72}.Debug|x64.ActiveCfg = Debug|x64
+		{3DD050DF-0947-41AC-853E-98B6ED1CAC72}.Debug|x64.Build.0 = Debug|x64
+		{3DD050DF-0947-41AC-853E-98B6ED1CAC72}.Release|x64.ActiveCfg = Release|x64
+		{3DD050DF-0947-41AC-853E-98B6ED1CAC72}.Release|x64.Build.0 = Release|x64
+		{D9950B85-1B4E-42E4-BC02-3E0A3099EEED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D9950B85-1B4E-42E4-BC02-3E0A3099EEED}.Debug|x64.Build.0 = Debug|Any CPU
+		{D9950B85-1B4E-42E4-BC02-3E0A3099EEED}.Release|x64.ActiveCfg = Release|Any CPU
+		{D9950B85-1B4E-42E4-BC02-3E0A3099EEED}.Release|x64.Build.0 = Release|Any CPU
+		{F60FF25D-C8CD-4107-99D4-45B194E85D9D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F60FF25D-C8CD-4107-99D4-45B194E85D9D}.Debug|x64.Build.0 = Debug|Any CPU
+		{F60FF25D-C8CD-4107-99D4-45B194E85D9D}.Release|x64.ActiveCfg = Release|Any CPU
+		{F60FF25D-C8CD-4107-99D4-45B194E85D9D}.Release|x64.Build.0 = Release|Any CPU
+		{D0780CCD-E5B7-4D46-80F2-ADBF6EBC71DD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D0780CCD-E5B7-4D46-80F2-ADBF6EBC71DD}.Debug|x64.Build.0 = Debug|Any CPU
+		{D0780CCD-E5B7-4D46-80F2-ADBF6EBC71DD}.Release|x64.ActiveCfg = Release|Any CPU
+		{D0780CCD-E5B7-4D46-80F2-ADBF6EBC71DD}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C665715B-138C-42B5-9055-8D3769ADD1FF}
+	EndGlobalSection
+EndGlobal

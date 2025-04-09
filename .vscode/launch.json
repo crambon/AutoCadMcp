@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "AutoCAD Debug",
+            "type": "coreclr",
+            "preLaunchTask": "build",
+            "request": "launch",
+            "program": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "requireExactSource": false
+        }
+    ]
+}

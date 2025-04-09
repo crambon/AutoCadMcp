@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>AutoCADMcpPlugin</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x64</Platforms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoCAD.NET" Version="25.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoCadMcp.Model\AutoCadMcp.Model.csproj" />
+    <ProjectReference Include="..\AutoCadMcp.Tcp\AutoCadMcp.Tcp.csproj" />
+  </ItemGroup>
+</Project>

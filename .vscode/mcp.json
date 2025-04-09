@@ -1,0 +1,14 @@
+{
+    "inputs": [],
+    "servers": {
+        "AutoCADMcpPlugin": {
+            "type": "stdio",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}\\AutoCADMcp\\AutoCADMcp.csproj"
+            ]
+        }
+    }
+}
