@@ -108,12 +108,46 @@ The tool method should:
 - Accept the parameters needed for the event
 - Call `SendEvent` with a new instance of your event
 
-### Step 4: Build and Test
+### Step 4: Build and Commit Changes
 
-1. Build the solution
-2. Load the plugin into AutoCAD
-3. Start the MCP server
-4. Test the new functionality
+When making changes to the codebase, follow these steps:
+
+1. Build the solution to verify your changes:
+```bash
+dotnet build
+```
+
+2. Fix any build errors if they occur and verify that the build succeeds
+
+3. Make your changes following the steps above
+
+4. Stage your changes:
+```bash
+git add .
+```
+
+5. Commit your changes with an emoji that represents the type of change:
+```bash
+git commit -m "✨ Add new feature for XYZ"
+```
+
+Common emoji prefixes:
+- ✨ (sparkles): New feature
+- 🐛 (bug): Bug fix
+- 📝 (memo): Documentation changes
+- ♻️ (recycle): Refactoring code
+- 🎨 (art): Improving structure/format of the code
+- ⚡️ (zap): Performance improvements
+- 🔧 (wrench): Configuration changes
+- 🚨 (rotating_light): Tests
+- 🔥 (fire): Removing code/files
+
+6. Push your changes:
+```bash
+git push origin feature/your-feature-name
+```
+
+7. Create a pull request for review
 
 ## Event Registration
 
