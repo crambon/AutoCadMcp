@@ -91,10 +91,10 @@ public class SocketServer : ISocketServer
                 if (bytesRead > 0)
                 {
                     string received = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    // json decode
                     var @event = JsonSerializer.Deserialize<IEvent>(received, _config.JsonSerializerOptions);
-                    var result = @event is null ? "Cannot parse event message." : await _eventBus.DispatchAsync(@event);
-                    var response = Encoding.UTF8.GetBytes(result ?? string.Empty);
+                    var result = @event == null ? new EventResult("Cannot parse event message. Arguments are not valid.", null) : await _eventBus.DispatchAsync(@event);
+                    var resultString = JsonSerializer.Serialize(result);
+                    var response = Encoding.UTF8.GetBytes(resultString);
                     await stream.WriteAsync(response, 0, response.Length, token);
                 }
             }

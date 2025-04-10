@@ -4,6 +4,7 @@ using AutoCadMcp.Tcp;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ModelContextProtocol.Protocol.Types;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 
@@ -24,7 +25,7 @@ public static class AutoCadTool
 {
     private static readonly SocketClient socketClient = new SocketClient(SocketConfig.Default);
 
-    [McpServerTool, Description("Connect to the AutoCAD server. Must be called before any other commands.")]
+    [McpServerTool, Description("Connect to the AutoCAD server.")]
     public static string Connect()
     {
         try
@@ -38,23 +39,61 @@ public static class AutoCadTool
         }
     }
 
-    private static string SendEvent(IEvent @event)
+    private static IEnumerable<Content> SendEvent(IEvent @event)
     {
+        var contents = new List<Content>();
+        if (!socketClient.IsConnected)
+        {
+            var result = Connect();
+            contents.Add(new Content
+            {
+                Type = "text",
+                Text = result
+            });
+        }
         try
         {
             socketClient.Send(@event);
             var response = socketClient.Receive();
-            return response;
+            if (response == null)
+            {
+                contents.Add(new Content
+                {
+                    Type = "text",
+                    Text = "No response from server."
+                });
+                return contents;
+            }
+            contents.Add(new Content
+            {
+                Type = "text",
+                Text = response.Text,
+            });
+            if (response.ImageData != null)
+            {
+                contents.Add(new Content
+                {
+                    Type = "image",
+                    Data = response.ImageData.Data,
+                    MimeType = response.ImageData.MimeType
+                });
+            }
+            return contents;
         }
         catch (Exception ex)
         {
-            return $"Error: {ex.Message}";
+            contents.Add(new Content
+            {
+                Type = "text",
+                Text = $"Error sending event: {ex.Message}"
+            });
+            return contents;
         }
     }
 
     [McpServerTool, Description("Alert the message in AutoCAD Application")]
-    public static string Alert(string message) => SendEvent(new AlertEvent(message));
+    public static IEnumerable<Content> Alert(string message) => SendEvent(new AlertEvent(message));
 
     [McpServerTool, Description("Execute AutoLISP code in AutoCAD")]
-    public static string ExecuteAutoLisp(string code) => SendEvent(new AutoLispExecutionEvent(code));
+    public static IEnumerable<Content> ExecuteAutoLisp(string code) => SendEvent(new AutoLispExecutionEvent(code));
 }

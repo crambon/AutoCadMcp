@@ -6,9 +6,10 @@ namespace AutoCADMcpPlugin.Event;
 
 public class AlertEventHandler : IEventHandler<AlertEvent>
 {
-    public Task<string> HandleAsync(AlertEvent @event)
+    public Task<EventResult> HandleAsync(AlertEvent @event)
     {
         Application.ShowAlertDialog(@event.Message);
-        return Task.FromResult($"Alert: {@event.Message}");
+        var result = new EventResult(@event.Message, null);
+        return Task.FromResult(result);
     }
 }

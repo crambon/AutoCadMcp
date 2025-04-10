@@ -7,7 +7,7 @@ namespace AutoCADMcpPlugin.Event
 {
     public class AutoLispExecutionHandler : IEventHandler<AutoLispExecutionEvent>
     {
-        public async Task<string> HandleAsync(AutoLispExecutionEvent @event)
+        public async Task<EventResult> HandleAsync(AutoLispExecutionEvent @event)
         {
             // Get the current document and editor
             Document doc = Application.DocumentManager.MdiActiveDocument;
@@ -19,13 +19,15 @@ namespace AutoCADMcpPlugin.Event
                 doc.SendStringToExecute(@event.Code + "\n", true, false, false);
 
                 // Return success message
-                return await Task.FromResult("AutoLISP code executed successfully.");
+                var result = new EventResult("AutoLISP code executed successfully.", null);
+                return await Task.FromResult(result);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 // Log and return error message
                 ed.WriteMessage($"Error executing AutoLISP code: {ex.Message}\n");
-                return await Task.FromResult($"Error: {ex.Message}");
+                var result = new EventResult($"Error executing AutoLISP code: {ex.Message}", null);
+                return await Task.FromResult(result);
             }
         }
     }

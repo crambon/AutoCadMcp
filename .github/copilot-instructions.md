@@ -124,6 +124,9 @@ The system automatically discovers and registers events and handlers:
 
 As long as your events and handlers follow the naming conventions and implement the correct interfaces, they will be automatically registered.
 
+## Debugging
+Use MCP Tool to debug the AutoCAD plugin.
+
 ## Best Practices
 
 1. Keep events small and focused on a single operation

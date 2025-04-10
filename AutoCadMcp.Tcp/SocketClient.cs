@@ -40,13 +40,15 @@ public class SocketClient(SocketConfig config) : ISocketClient
         _stream.Write(data, 0, data.Length);
     }
 
-    public string Receive()
+    public EventResult? Receive()
     {
         if (!IsConnected || _stream == null)
             throw new InvalidOperationException("Not connected to a server.");
 
         byte[] buffer = new byte[1024];
         int bytesRead = _stream.Read(buffer, 0, buffer.Length);
-        return Encoding.UTF8.GetString(buffer, 0, bytesRead);
+        var text = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+        var result = JsonSerializer.Deserialize<EventResult>(text);
+        return result;
     }
 }

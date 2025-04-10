@@ -25,7 +25,7 @@ public class EventBus
         }
     }
 
-    public async Task<string> DispatchAsync(IEvent @event)
+    public async Task<EventResult> DispatchAsync(IEvent @event)
     {
         var eventType = @event.GetType();
         if (_handlers.TryGetValue(eventType, out var handler))
@@ -33,7 +33,7 @@ public class EventBus
             var method = handler.GetType().GetMethod("HandleAsync");
             if (method != null)
             {
-                var task = (Task<string>)method.Invoke(handler, [@event])!;
+                var task = (Task<EventResult>)method.Invoke(handler, [@event])!;
                 return await task.ConfigureAwait(false);
             }
         }
