@@ -1,15 +1,15 @@
+namespace AutoCadMcp.Tcp;
+
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using AutoCadMcp.Model;
 
-namespace AutoCadMcp.Tcp;
 
 public class SocketClient(SocketConfig config) : ISocketClient
 {
     private TcpClient? _client;
     private NetworkStream? _stream;
-
     public bool IsConnected => _client?.Connected ?? false;
 
     public void Connect()
@@ -18,7 +18,7 @@ public class SocketClient(SocketConfig config) : ISocketClient
             throw new InvalidOperationException("Already connected to a server.");
 
         _client = new TcpClient();
-        _client.Connect(config.Address, config.Port);
+        _client.Connect("localhost", config.Port);
         _stream = _client.GetStream();
     }
 
@@ -30,12 +30,12 @@ public class SocketClient(SocketConfig config) : ISocketClient
         _client = null;
     }
 
-    public void Send<T>(T eventMessage) where T : IEventMessage
+    public void Send<T>(T eventMessage) where T : IEvent
     {
         if (!IsConnected || _stream == null)
             throw new InvalidOperationException("Not connected to a server.");
 
-        var message = JsonSerializer.Serialize(eventMessage);
+        var message = JsonSerializer.Serialize(eventMessage, config.JsonSerializerOptions);
         byte[] data = Encoding.UTF8.GetBytes(message);
         _stream.Write(data, 0, data.Length);
     }

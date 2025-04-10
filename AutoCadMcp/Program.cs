@@ -1,4 +1,5 @@
 ﻿using AutoCadMcp.Model;
+using AutoCadMcp.Model.Event;
 using AutoCadMcp.Tcp;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,9 +22,9 @@ await builder.Build().RunAsync();
 [McpServerToolType]
 public static class AutoCadTool
 {
-    private static readonly SocketClient socketClient = new SocketClient(DefaultSocketConfig.Get());
+    private static readonly SocketClient socketClient = new SocketClient(SocketConfig.Default);
 
-    [McpServerTool, Description("Connect to the AutoCAD server")]
+    [McpServerTool, Description("Connect to the AutoCAD server. Must be called before any other commands.")]
     public static string Connect()
     {
         try
@@ -37,12 +38,11 @@ public static class AutoCadTool
         }
     }
 
-    [McpServerTool, Description("Alert the message in AutoCAD Application")]
-    public static string Alert(string message)
+    private static string SendEvent(IEvent @event)
     {
         try
         {
-            socketClient.Send(new AlertEvent(message));
+            socketClient.Send(@event);
             var response = socketClient.Receive();
             return response;
         }
@@ -52,4 +52,9 @@ public static class AutoCadTool
         }
     }
 
+    [McpServerTool, Description("Alert the message in AutoCAD Application")]
+    public static string Alert(string message) => SendEvent(new AlertEvent(message));
+
+    [McpServerTool, Description("Execute AutoLISP code in AutoCAD")]
+    public static string ExecuteAutoLisp(string code) => SendEvent(new AutoLispExecutionEvent(code));
 }

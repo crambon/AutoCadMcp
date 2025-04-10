@@ -1,18 +1,30 @@
+namespace AutoCADMcp.Tcp;
+
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using AutoCadMcp.Model;
+using AutoCadMcp.Tcp;
 using AutoCADMcpPlugin.Model;
 
-namespace AutoCADMcp.Tcp;
 
 
-public class SocketServer(SocketConfig config, IEventSubscriber eventSubscriber) : ISocketServer
+public class SocketServer : ISocketServer
 {
     private TcpListener? _listener;
     private CancellationTokenSource? _cts;
     private ServerStatus _status = ServerStatus.Stopped;
+
+    private readonly SocketConfig _config;
+
+    private readonly EventBus _eventBus;
+
+    public SocketServer(SocketConfig config)
+    {
+        _config = config;
+        _eventBus = new EventBus();
+    }
 
     public ServerStatus Start()
     {
@@ -20,7 +32,7 @@ public class SocketServer(SocketConfig config, IEventSubscriber eventSubscriber)
             return _status;
 
         _cts = new CancellationTokenSource();
-        _listener = new TcpListener(config.Address, config.Port);
+        _listener = new TcpListener(IPAddress.Any, _config.Port);
         _listener.Start();
         _status = ServerStatus.Started;
 
@@ -80,8 +92,8 @@ public class SocketServer(SocketConfig config, IEventSubscriber eventSubscriber)
                 {
                     string received = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     // json decode
-                    var eventMessage = JsonSerializer.Deserialize<AlertEvent>(received);
-                    var result = eventMessage is null ? "Cannot parse event message." : await eventSubscriber.Subscribe(eventMessage);
+                    var @event = JsonSerializer.Deserialize<IEvent>(received, _config.JsonSerializerOptions);
+                    var result = @event is null ? "Cannot parse event message." : await _eventBus.DispatchAsync(@event);
                     var response = Encoding.UTF8.GetBytes(result ?? string.Empty);
                     await stream.WriteAsync(response, 0, response.Length, token);
                 }

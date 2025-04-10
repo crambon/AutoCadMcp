@@ -1,7 +1,5 @@
 using Autodesk.AutoCAD.Runtime;
-using AutoCadMcp.Model;
 using AutoCadMcp.Tcp;
-using AutoCADMcpPlugin.Model;
 using AutoCADMcp.Tcp;
 
 [assembly: CommandClass(typeof(AutoCADMcpPlugin.McpCommand))]
@@ -11,9 +9,7 @@ namespace AutoCADMcpPlugin;
 
 public class McpCommand
 {
-    private SocketServer _socketServer = new(
-        DefaultSocketConfig.Get(),
-        new EventSubscriber());
+    private SocketServer _socketServer = new(SocketConfig.Default);
 
     [CommandMethod("StartMcp", CommandFlags.Modal)]
     public void StartMcp()

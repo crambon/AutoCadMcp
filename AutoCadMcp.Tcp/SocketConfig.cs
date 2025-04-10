@@ -1,9 +1,19 @@
+namespace AutoCadMcp.Tcp;
 
-using System.Net;
+using System.Text.Json;
 
-public record SocketConfig(IPAddress Address, int Port);
-
-public static class DefaultSocketConfig
+public class SocketConfig(int port)
 {
-    public static SocketConfig Get() => new(IPAddress.Any, 5000);
+    public int Port { get; } = port;
+
+    public JsonSerializerOptions JsonSerializerOptions { get; } = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        Converters =
+        {
+            new EventConverter()
+        }
+    };
+
+    public static SocketConfig Default => new(9887);
 }
