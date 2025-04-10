@@ -97,4 +97,8 @@ public static class AutoCadTool
     [McpServerTool, Description("Draw a line in AutoCAD")]
     public static IEnumerable<Content> DrawLine(double startX, double startY, double endX, double endY) => 
         SendEvent(new DrawLineEvent(startX, startY, endX, endY));
+
+    [McpServerTool, Description("Draw a polyline in AutoCAD")]
+    public static IEnumerable<Content> DrawPolyline(Point[] points) => 
+        SendEvent(new DrawPolylineEvent(points));
 }
