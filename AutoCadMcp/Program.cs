@@ -96,4 +96,8 @@ public static class AutoCadTool
 
     [McpServerTool, Description("Execute AutoLISP code in AutoCAD")]
     public static IEnumerable<Content> ExecuteAutoLisp(string code) => SendEvent(new AutoLispExecutionEvent(code));
+
+    [McpServerTool, Description("Draw a line in AutoCAD")]
+    public static IEnumerable<Content> DrawLine(double startX, double startY, double endX, double endY) => 
+        SendEvent(new DrawLineEvent(startX, startY, endX, endY));
 }
