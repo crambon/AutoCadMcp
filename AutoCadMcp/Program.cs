@@ -91,9 +91,6 @@ public static class AutoCadTool
         }
     }
 
-    [McpServerTool, Description("Alert the message in AutoCAD Application")]
-    public static IEnumerable<Content> Alert(string message) => SendEvent(new AlertEvent(message));
-
     [McpServerTool, Description("Execute AutoLISP code in AutoCAD")]
     public static IEnumerable<Content> ExecuteAutoLisp(string code) => SendEvent(new AutoLispExecutionEvent(code));
 
