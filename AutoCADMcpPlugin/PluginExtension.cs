@@ -1,12 +1,12 @@
 ﻿using Autodesk.AutoCAD.Runtime;
-using Acad = Autodesk.AutoCAD.ApplicationServices.Application;
+using Autodesk.AutoCAD.ApplicationServices;
 
 namespace AutoCADMcpPlugin;
 public class PluginExtension : IExtensionApplication
 {
     public void Initialize()
     {
-        var doc = Acad.DocumentManager.MdiActiveDocument;
+        var doc = Application.DocumentManager.MdiActiveDocument;
         if (doc == null)
             return;
         doc.Editor.WriteMessage("\nPlugin initialized.");
