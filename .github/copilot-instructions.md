@@ -128,19 +128,19 @@ git add .
 
 5. Commit your changes with an emoji that represents the type of change:
 ```bash
-git commit -m "✨ Add new feature for XYZ"
+git commit -m ":sparkles: Add new feature for XYZ"
 ```
 
 Common emoji prefixes:
-- ✨ (sparkles): New feature
-- 🐛 (bug): Bug fix
-- 📝 (memo): Documentation changes
-- ♻️ (recycle): Refactoring code
-- 🎨 (art): Improving structure/format of the code
-- ⚡️ (zap): Performance improvements
-- 🔧 (wrench): Configuration changes
-- 🚨 (rotating_light): Tests
-- 🔥 (fire): Removing code/files
+- :sparkles: (sparkles): New feature
+- :bug: (bug): Bug fix
+- :memo: (memo): Documentation changes
+- :recycle: (recycle): Refactoring code
+- :art: (art): Improving structure/format of the code
+- :zap:️ (zap): Performance improvements
+- :wrench: (wrench): Configuration changes
+- :rotating_light: (rotating_light): Tests
+- :fire: (fire): Removing code/files
 
 6. Push your changes:
 ```bash
