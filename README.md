@@ -21,8 +21,8 @@ AutoCAD MCP Plugin is a plugin to connect AutoCAD and AI assistants (such as Git
 
 ### Connecting with GitHub Copilot
 
-1. Start the MCP server (AutoCadMcp) from `.github/mcp.json`. ![start-mcp](static/start-mcp.png)
-2. Switch Copilot Chat to Agent mode and confirm that the AutoCADMcp server is added from the wrench icon at the top left. ![agent-mode](static/copilot-agent.png)
+1. Start the MCP server (AutoCadMcp) from `.github/mcp.json`. ![start-mcp](/docs/static/start-mcp.png)
+2. Switch Copilot Chat to Agent mode and confirm that the AutoCADMcp server is added from the wrench icon at the top left. ![agent-mode](/docs/static/copilot-agent.png)
 3. Give instructions such as "Draw a circle in AutoCAD" in Copilot Chat, and AutoCAD will be operated via the MCP server.
 
 Reference: https://docs.github.com/en/copilot/customizing-copilot/extending-copilot-chat-with-mcp
